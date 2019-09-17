@@ -1,4 +1,4 @@
-# Hackathon for Ericsson Weather Challenge 
+# Hackathon for Ericsson Weather Challenge 2.8
 
 ## Available
 
