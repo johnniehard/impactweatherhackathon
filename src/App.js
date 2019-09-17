@@ -10,28 +10,44 @@ import Map from './Map'
 
 function App() {
 
-  // const [data, setData] = useState(null)
+  const [data, setData] = useState(null)
+  const [minute, setMinute] = useState(0)
+
+  useEffect(() => {
+    
+    const timer = setInterval(() => {
+      setMinute(minute + 10)
+    }, 1000 * 20)
+
+    return () => {
+      clearInterval(timer)
+    }
+  })
 
   
-  // useEffect(() => {
-  //   console.log('fljdlkfj')
-  //   const fetchData = async () => {
-  //     // const response = await fetch('/precipdata/201909070900')
-  //     // const json = await response.json()
-  //     // console.log(json)
-  //     // localStorage.setItem('ourdata', JSON.stringify(json))
-  //     // setData(json)
+  useEffect(() => {
+    const fetchData = async () => {
 
-  //     setData(JSON.parse(localStorage.getItem('ourdata')))
-  //   }
+      const url = `/precipdata/2019090709${minute.toString().length < 2 ? `0${minute}` : minute}`
 
-  //   fetchData()
-  // }, [])
+      console.log(url)
+
+      const response = await fetch(url)
+      const json = await response.json()
+      console.log(json)
+      localStorage.setItem('ourdata', JSON.stringify(json))
+      setData(json)
+
+      // setData(JSON.parse(localStorage.getItem('ourdata')))
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <>
       <div className="mapcontainer">
-        <Map />
+        <Map data={data} />
       </div>
     </>
   );

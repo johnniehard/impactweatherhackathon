@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import "mapbox-gl/dist/mapbox-gl.css"
 import mapboxgl from 'mapbox-gl'
 
-function Map() {
+function Map({ data }) {
 
     const [map, setMap] = useState(null);
 
@@ -88,7 +88,7 @@ function Map() {
 
 
 
-            map.getSource('precip').setData(JSON.parse(localStorage.getItem('ourdata')))
+            // map.getSource('precip').setData(JSON.parse(localStorage.getItem('ourdata')))
 
         })
 
@@ -112,16 +112,31 @@ function Map() {
         }
     }, [from, to])
 
-    // if (map && data) {
-    //     console.log('setting source')
-    //     try {
-    //         console.log(data)
-    //         map.getSource('precip').setData(data)
-    //     } catch(e){
-    //         console.error(e)
-    //     }
-    //     console.log('sett source')
-    // }
+
+    const addDataToMap = (data) => {
+        console.log('setting source')
+        console.log(map.getSource('precip'))
+        try {
+            console.log(data)
+            map.getSource('precip').setData(data)
+        } catch (e) {
+            console.error(e)
+        }
+        console.log('sett source')
+    }
+
+    if (data) {
+        if (!map){
+            console.log('no map waiting')
+            setTimeout(() => {
+                addDataToMap(data)
+            }, 2000)
+        } else {
+            console.log('map, no wait')
+            addDataToMap(data)
+        }
+       
+    }
 
     return (
         <div className="Map" ref={el => (ref.current = el)} />
