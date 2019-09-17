@@ -1,28 +1,32 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import "mapbox-gl/dist/mapbox-gl.css"
 import mapboxgl from 'mapbox-gl'
 
-function Map() {
 
+function Map() {
+    
+    let a = 0;
     const [map, setMap] = useState(null);
 
     const [from, setFrom] = useState(null)
     const [to, setTo] = useState(null)
 
     const ref = useRef(null);
-
-    const setPoints = (e) => {
-        console.log(e)
-        console.log('click', from, to)
-
-        if (!from) {
+    const setPoints = useCallback((e) => {
+        if(a > 1){
+            setFrom(null);
+            setTo(null);
+            a = 0;
+        }
+        if (a % 2 === 0) {
+            console.log('setting from: ', e.lngLat.lng)
             setFrom([e.lngLat.lng, e.lngLat.lat].join(','))
-        } else if (!to) {
-            console.log('setting to')
-
+        } else {
+            console.log('setting to', e.lngLat.lng)
             setTo([e.lngLat.lng, e.lngLat.lat].join(','))
         }
-    }
+        a++;
+    }, [from, to])
 
     // Initialize map
     useEffect(() => {
@@ -81,11 +85,7 @@ function Map() {
                 },
                 'source': 'route'
             });
-
-            map.on('click', (e) => {
-                setPoints(e)
-            })
-
+            map.on('click', setPoints);
 
 
             map.getSource('precip').setData(JSON.parse(localStorage.getItem('ourdata')))
@@ -95,22 +95,27 @@ function Map() {
     }, [])
 
     useEffect(() => {
-        console.log(from, to)
         if (from && to) {
             const getData = async () => {
-                const route = await fetch(`https://skolor.geoinfobyran.se/osrm/route?from=${from}&to=${to}`)
-
-                const json = route.json()
-
-                map.getSource('precip').setData(json)
-
-
+                const response = await fetch('/map/' + from + '/' + to);
+                const json = await response.json();
+                console.log(json.routes[0]);
+                const newJson = {
+                    "type": "FeatureCollection",
+                    "features": [
+                      {
+                        "type": "Feature",
+                        "properties": {},
+                        "geometry": json.routes[0].geometry
+                      }
+                    ]
+                  }
+                map.getSource('route').setData(newJson)
             }
-
             getData()
 
         }
-    }, [from, to])
+    }, [from, to, map])
 
     // if (map && data) {
     //     console.log('setting source')

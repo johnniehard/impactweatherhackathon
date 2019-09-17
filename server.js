@@ -40,6 +40,13 @@ app.get('/precipdata/:date', async (req, res) => {
         console.error(e)
     }
 })
+app.get('/map/:from/:to', async (req, res) => {
+    const {from, to} = req.params;
+    const response = await fetch(`https://skolor-api.geoinfobyran.se/v1/osrm/route?start=${from}&end=${to}`);
+    const json = await response.json();
+    console.log(json);
+    res.json(json);
+})
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
