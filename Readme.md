@@ -24,7 +24,7 @@
 
 ### User Genereated
 - Pictures of the sky
-- Waze-like confirmation of weather conditions (opt-in notifications ask you to confirm if it's raining or not
+- Waze-like confirmation of weather conditions (i.e. opt-in notifications ask you to confirm if it's raining or not)
 
 ## Open Forecasting Model
 - IFS
