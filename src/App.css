@@ -31,3 +31,11 @@
     transform: rotate(360deg);
   }
 }
+
+.Map {
+  height: 100%;
+}
+
+.mapcontainer {
+  height: 100vh;
+}

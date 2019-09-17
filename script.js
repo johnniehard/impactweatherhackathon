@@ -24,5 +24,5 @@ async function getdata(date){
         console.error(e)
     }
 }
-
+8
 getdata('201909070900')
