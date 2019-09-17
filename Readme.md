@@ -14,7 +14,7 @@
 - To give give citizens access to the same kind of forecasts for their personal use cases
 
 ## Solution
-- By combining Ericsson's data with user generated data, parsing it to an open forecasting model and feeding the whole this into TensorFLow, we can get bootstrap machine learning and gt the local, short term forecasts that will deliver the value.
+- By combining Ericsson's data with user generated data, parsing it to an open forecasting model and feeding the whole this into TensorFLow, we can bootstrap machine learning and get the local, short term forecasts that will deliver the value.
 
 ## Examples of User Data
 
