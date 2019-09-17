@@ -13,8 +13,8 @@
 - To automatically turn on and off pumps
 - To give give citizens access to the same kind of forecasts for their personal use cases
 
-## Hypothesis
-- By combining Ericsson's data with 'user data', parsing it to an open forecasting model and feeding the whole cha-bang into TensorFLow, we can get the local, short term forecasts that will deliver the value.
+## Solution
+- By combining Ericsson's data with user generated data, parsing it to an open forecasting model and feeding the whole this into TensorFLow, we can bootstrap machine learning and get the local, short term forecasts that will deliver the value.
 
 ## Examples of User Data
 
@@ -24,7 +24,7 @@
 
 ### User Genereated
 - Pictures of the sky
-- Waze-like confirmation of weather conditions (opt-in notifications ask you to confirm if it's raining or not
+- Waze-like confirmation of weather conditions (i.e. opt-in notifications ask you to confirm if it's raining or not)
 
 ## Open Forecasting Model
 - IFS
