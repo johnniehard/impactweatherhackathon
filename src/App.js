@@ -11,13 +11,13 @@ import Map from './Map'
 function App() {
 
   const [data, setData] = useState(null)
-  const [minute, setMinute] = useState(7)
+  const [minute, setMinute] = useState(30)
 
   useEffect(() => {
     
     const timer = setInterval(() => {
       setMinute(minute + 1)
-    }, 1000 * 5)
+    }, 1000 * 1)
 
     return () => {
       clearInterval(timer)
@@ -28,7 +28,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
 
-      const url = `/precipdata/201909${minute.toString().length < 2 ? `0${minute}` : minute}0900`
+      const url = `/precipdata/2019090708${minute.toString().length < 2 ? `0${minute}` : minute}`
 
       console.log(url)
 
