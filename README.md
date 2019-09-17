@@ -1,6 +1,12 @@
-[SLIDES](https://github.com/johnniehard/impactweatherhackathon/blob/master/2.8%20-%20Always%20Bring%20the%20Weather.key)
+
 
 # Hackathon for Ericsson Weather Challenge 2.8
+
+- Team name: Always Bring the Weather
+- Team members: Johanna Samuelsen, Alexander Gyllensvärd, Andres Mellik, Johnnie Hård, Magnus Westerberg
+- Presentation slides: [SLIDES](https://github.com/johnniehard/impactweatherhackathon/blob/master/2.8%20-%20Always%20Bring%20the%20Weather.key)
+- Services used: Ericsson Weather Data, OSRM, MapBox, ISF, TensorFlow
+- Tech stack: Node.js, React
 
 ## Available
 
