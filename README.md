@@ -1,3 +1,5 @@
+[SLIDES](https://github.com/johnniehard/impactweatherhackathon/blob/master/2.8%20-%20Always%20Bring%20the%20Weather.key)
+
 # Hackathon for Ericsson Weather Challenge 2.8
 
 ## Available
