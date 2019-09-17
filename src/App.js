@@ -24,7 +24,7 @@ function App() {
     }
   })
 
-  
+
   useEffect(() => {
     const fetchData = async () => {
 
