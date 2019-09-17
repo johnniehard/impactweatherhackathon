@@ -31,7 +31,7 @@ function Map({ data }) {
             container: ref.current,
             style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
             center: [18.01579938373959, 59.342619596215286],
-            zoom: 11
+            zoom: 8
         })
 
         map.on("load", () => {
