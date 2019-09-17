@@ -115,7 +115,7 @@ function Map({ data }) {
 
     const addDataToMap = (data) => {
         console.log('setting source')
-        console.log(map.getSource('precip'))
+        // console.log(map.getSource('precip'))
         try {
             console.log(data)
             map.getSource('precip').setData(data)
@@ -130,7 +130,7 @@ function Map({ data }) {
             console.log('no map waiting')
             setTimeout(() => {
                 addDataToMap(data)
-            }, 2000)
+            }, 3000)
         } else {
             console.log('map, no wait')
             addDataToMap(data)
