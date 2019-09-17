@@ -27,7 +27,7 @@
 - Waze-like confirmation of weather conditions (opt-in notifications ask you to confirm if it's raining or not
 
 ## Open Forecasting Model
-- IIFS
+- IFS
 
 ## Machine Learning Platform
 - TensorFlow
