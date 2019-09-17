@@ -17,7 +17,7 @@ function App() {
     
     const timer = setInterval(() => {
       setMinute(minute + 1)
-    }, 1000 * 20)
+    }, 1000 * 5)
 
     return () => {
       clearInterval(timer)
@@ -42,7 +42,7 @@ function App() {
     }
 
     fetchData()
-  }, [])
+  }, [minute])
 
   return (
     <>
