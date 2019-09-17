@@ -12,7 +12,7 @@ function Map() {
     const ref = useRef(null);
 
     const setPoints = (e) => {
-        console.log()
+        console.log(e)
         console.log('click', from, to)
 
         if (!from) {
@@ -49,7 +49,7 @@ function Map() {
                     "circle-color": {
                         "property": "value",
                         "stops": [
-                            [0.2, "white"],
+                            [0.2, "khaki"],
                             // [20, "#fee0d2"],
                             // [30, "#fcbba1"],
                             // [40, "#fc9272"],
