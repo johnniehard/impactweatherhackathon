@@ -6,7 +6,23 @@ function Map() {
 
     const [map, setMap] = useState(null);
 
+    const [from, setFrom] = useState(null)
+    const [to, setTo] = useState(null)
+
     const ref = useRef(null);
+
+    const setPoints = (e) => {
+        console.log()
+        console.log('click', from, to)
+
+        if (!from) {
+            setFrom([e.lngLat.lng, e.lngLat.lat].join(','))
+        } else if (!to) {
+            console.log('setting to')
+
+            setTo([e.lngLat.lng, e.lngLat.lat].join(','))
+        }
+    }
 
     // Initialize map
     useEffect(() => {
@@ -30,18 +46,71 @@ function Map() {
                 'id': 'precip',
                 'type': 'circle',
                 'paint': {
-                    'circle-color': 'red',
+                    "circle-color": {
+                        "property": "value",
+                        "stops": [
+                            [0.2, "white"],
+                            // [20, "#fee0d2"],
+                            // [30, "#fcbba1"],
+                            // [40, "#fc9272"],
+                            [10, "orange"],
+                            // [60, "#ef3b2c"],
+                            // [70, "#cb181d"],
+                            // [80, "#a50f15"],
+                            [20, "red"]
+                        ]
+                    },
                     'circle-opacity': 0.8,
                     'circle-radius': 5
                 },
                 'source': 'precip'
             });
 
+            map.addSource('route', {
+                'type': 'geojson',
+                'data': null
+            });
+
+            map.addLayer({
+                'id': 'route',
+                'type': 'line',
+                'paint': {
+                    'line-color': 'red',
+                    'line-opacity': 0.8,
+                    'line-width': 5
+                },
+                'source': 'route'
+            });
+
+            map.on('click', (e) => {
+                setPoints(e)
+            })
+
+
+
             map.getSource('precip').setData(JSON.parse(localStorage.getItem('ourdata')))
 
         })
 
     }, [])
+
+    useEffect(() => {
+        console.log(from, to)
+        if (from && to) {
+            const getData = async () => {
+                const route = await fetch(`https://skolor.geoinfobyran.se/osrm/route?from=${from}&to=${to}`)
+
+                const json = route.json()
+
+                map.getSource('precip').setData(json)
+
+
+            }
+
+            getData()
+
+        }
+    }, [from, to])
 
     // if (map && data) {
     //     console.log('setting source')
