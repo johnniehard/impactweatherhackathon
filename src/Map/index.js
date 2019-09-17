@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import "mapbox-gl/dist/mapbox-gl.css"
 import mapboxgl from 'mapbox-gl'
 
-
-function Map() {
+function Map({ data }) {
     
     let a = 0;
     const [map, setMap] = useState(null);
@@ -35,7 +34,7 @@ function Map() {
             container: ref.current,
             style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
             center: [18.01579938373959, 59.342619596215286],
-            zoom: 11
+            zoom: 8
         })
 
         map.on("load", () => {
@@ -88,7 +87,7 @@ function Map() {
             map.on('click', setPoints);
 
 
-            map.getSource('precip').setData(JSON.parse(localStorage.getItem('ourdata')))
+            // map.getSource('precip').setData(JSON.parse(localStorage.getItem('ourdata')))
 
         })
 
@@ -117,16 +116,31 @@ function Map() {
         }
     }, [from, to, map])
 
-    // if (map && data) {
-    //     console.log('setting source')
-    //     try {
-    //         console.log(data)
-    //         map.getSource('precip').setData(data)
-    //     } catch(e){
-    //         console.error(e)
-    //     }
-    //     console.log('sett source')
-    // }
+
+    const addDataToMap = (data) => {
+        console.log('setting source')
+        // console.log(map.getSource('precip'))
+        try {
+            console.log(data)
+            map.getSource('precip').setData(data)
+        } catch (e) {
+            console.error(e)
+        }
+        console.log('sett source')
+    }
+
+    if (data) {
+        if (!map){
+            console.log('no map waiting')
+            setTimeout(() => {
+                addDataToMap(data)
+            }, 3000)
+        } else {
+            console.log('map, no wait')
+            addDataToMap(data)
+        }
+       
+    }
 
     return (
         <div className="Map" ref={el => (ref.current = el)} />
