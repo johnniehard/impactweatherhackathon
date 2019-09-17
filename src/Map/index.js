@@ -15,18 +15,44 @@ function Map() {
             container: ref.current,
             style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
             center: [18.01579938373959, 59.342619596215286],
-            zoom: 12
+            zoom: 11
         })
 
         map.on("load", () => {
             setMap(map)
 
-            map.on('click', () => {
-                console.log(map.getCenter())
-            })
+            map.addSource('precip', {
+                'type': 'geojson',
+                'data': null
+            });
+
+            map.addLayer({
+                'id': 'precip',
+                'type': 'circle',
+                'paint': {
+                    'circle-color': 'red',
+                    'circle-opacity': 0.8,
+                    'circle-radius': 5
+                },
+                'source': 'precip'
+            });
+
+            map.getSource('precip').setData(JSON.parse(localStorage.getItem('ourdata')))
+
         })
 
     }, [])
+
+    // if (map && data) {
+    //     console.log('setting source')
+    //     try {
+    //         console.log(data)
+    //         map.getSource('precip').setData(data)
+    //     } catch(e){
+    //         console.error(e)
+    //     }
+    //     console.log('sett source')
+    // }
 
     return (
         <div className="Map" ref={el => (ref.current = el)} />
